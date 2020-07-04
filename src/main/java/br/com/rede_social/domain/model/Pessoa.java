@@ -2,6 +2,7 @@ package br.com.rede_social.domain.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -50,7 +51,7 @@ public class Pessoa implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "id_questionario")
-	private Questionario questionario;
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_pessoa")
+	private List<Questionario> questionario;
 }

@@ -32,12 +32,13 @@ public class Questionario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_questionario_seq")
 	@SequenceGenerator(name = "tb_questionario_seq", sequenceName = "tb_questionario_seq", allocationSize = 1)
 	private Integer id;
-	private String nomeCompleto;
+
 	@Enumerated(EnumType.STRING)
 	private Sintoma sintomas;
 	
 	@Enumerated(EnumType.STRING)
 	private PeriodoSintoma periodoSintoma;
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	private Usuario usuario;
+	private Pessoa pessoa;
 }
