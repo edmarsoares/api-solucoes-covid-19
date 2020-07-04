@@ -19,6 +19,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Default;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -57,4 +60,6 @@ public class Pessoa implements Serializable {
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_pessoa")
 	private List<Questionario> questionario;
+	
+	private Boolean flagInteresseAuxilioPesuisas;
 }
