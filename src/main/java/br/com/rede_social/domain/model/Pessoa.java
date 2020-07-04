@@ -38,6 +38,7 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_pessoa_seq")
 	@SequenceGenerator(name = "tb_pessoa_seq", sequenceName = "tb_pessoa_seq", allocationSize = 1)
+	@Column(name = "Id_Pessoa")
 	private Integer id;
 	
 	@NotBlank(message = "nome não pode ser nulo")
