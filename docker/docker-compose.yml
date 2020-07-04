@@ -1,0 +1,26 @@
+version: '3.0'
+ 
+ 
+services:
+  db:
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '123'
+    build:
+      dockerfile: database.dockerfile
+      context: ..
+    ports:
+      - "5432:5432"
+    container_name: postgres
+  api:
+    environment:
+      URL_BD: postgres:5432/api_covid_19?createDatabaseIfNotExist=true
+      USERNAME_BD: postgres
+      PASSWORD_BD: 123
+    build:
+      dockerfile: api.dockerfile
+      context: ..
+    ports:
+      - "8080:8080"
+    container_name: api_covid
+    

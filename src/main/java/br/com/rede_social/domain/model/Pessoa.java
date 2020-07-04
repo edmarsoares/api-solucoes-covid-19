@@ -30,6 +30,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Pessoa implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -286282886535469086L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_pessoa_seq")
 	@SequenceGenerator(name = "tb_pessoa_seq", sequenceName = "tb_pessoa_seq", allocationSize = 1)

@@ -16,7 +16,7 @@
 	<description> project  Spring Boot with oauth 2  and login social</description>
 
 	<properties>
-		<java.version>14</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -81,6 +81,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>apicovid</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
