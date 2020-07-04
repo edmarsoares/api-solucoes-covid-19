@@ -18,9 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.CollectionType;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +28,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Questionario implements Serializable {
-	
+
+	private static final long serialVersionUID = 4246341855203264108L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_questionario_seq")
 	@SequenceGenerator(name = "tb_questionario_seq", sequenceName = "tb_questionario_seq", allocationSize = 1)
@@ -45,7 +44,7 @@ public class Questionario implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	private PeriodoSintoma periodoSintoma;
-	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Pessoa pessoa;
 }
