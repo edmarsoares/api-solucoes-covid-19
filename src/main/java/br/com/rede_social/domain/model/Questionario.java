@@ -1,6 +1,7 @@
 package br.com.rede_social.domain.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,4 +50,8 @@ public class Questionario implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Pessoa pessoa;
+
+	@CreationTimestamp
+	private LocalDateTime dataQuestionario;
+	
 }
