@@ -16,8 +16,8 @@ public class PessoaServiceImpl implements PessoaService {
 	private PessoaRepository pessoaRepository;
 	
 	@Override
-	public void save(Pessoa pessoa) {
-		this.pessoaRepository.save(pessoa);
+	public Pessoa save(Pessoa pessoa) {
+		return this.pessoaRepository.save(pessoa);
 	}
 
 	@Override

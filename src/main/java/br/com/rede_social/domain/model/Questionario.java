@@ -49,6 +49,7 @@ public class Questionario implements Serializable {
 	private PeriodoSintoma periodoSintoma;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 
 	@CreationTimestamp

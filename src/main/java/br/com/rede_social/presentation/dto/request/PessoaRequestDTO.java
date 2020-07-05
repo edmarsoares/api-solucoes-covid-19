@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.rede_social.domain.model.Pessoa;
 import br.com.rede_social.domain.model.Sexo;
 import lombok.Data;
@@ -16,6 +18,7 @@ public class PessoaRequestDTO {
 	private String nomeCompleto;
 	private String celular;
 	private Sexo sexo;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
 	
 	public Pessoa toEntity() {

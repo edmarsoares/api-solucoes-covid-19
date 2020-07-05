@@ -32,10 +32,16 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_usuario_seq")
 	@SequenceGenerator(name = "tb_usuario_seq", sequenceName = "tb_usuario_seq", allocationSize = 1)
-	@Column(name = "id_usuario")
+	@Column(name = "ID_USUARIO")
 	private Integer id;
+	
+	@Column(name = "USUARIO")
 	private String userName;
+
+	@Column(name = "EMAIL")
 	private String email;
+	
+	@Column(name = "SENHA")
 	private String password;
 	
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})

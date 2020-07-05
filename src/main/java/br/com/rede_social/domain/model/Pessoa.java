@@ -58,7 +58,6 @@ public class Pessoa implements Serializable {
 	private Usuario usuario;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "id_pessoa")
 	private List<Questionario> questionario;
 	
 	private Boolean flagInteresseAuxilioPesuisas;

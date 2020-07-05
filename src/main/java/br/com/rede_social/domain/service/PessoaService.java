@@ -7,7 +7,7 @@ import br.com.rede_social.domain.model.Pessoa;
 
 public interface PessoaService {
 	
-	void save(Pessoa pessoa);
+	Pessoa save(Pessoa pessoa);
 	void remove(Integer id);
 	Optional<Pessoa> findById(Integer id);
 	List<Pessoa> listAll();
