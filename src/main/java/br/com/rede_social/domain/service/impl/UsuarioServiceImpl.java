@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 
-import br.com.rede_social.domain.model.Pessoa;
 import br.com.rede_social.domain.model.Questionario;
 import br.com.rede_social.domain.model.Sexo;
 import br.com.rede_social.domain.model.Usuario;
-import br.com.rede_social.domain.service.PessoaService;
 import br.com.rede_social.domain.service.UsuarioService;
+import br.com.rede_social.infrastructure.exception.UsuarioExistenteException;
 import br.com.rede_social.infrastructure.repository.QuestionarioRepository;
 import br.com.rede_social.infrastructure.repository.UsuarioRepository;
 import br.com.rede_social.presentation.dto.request.PessoaRequestDTO;
@@ -25,9 +25,6 @@ import br.com.rede_social.presentation.dto.request.UsuarioRequestDTO;
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
-	private PessoaService pessoaService;
-	
-	@Autowired
 	private QuestionarioRepository questionarioRepository;
 	
 	@Autowired
@@ -35,26 +32,39 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public Usuario cadastrarUsuario(UsuarioRequestDTO user) {
-		Usuario usuario = recuperarUsuario(user);
-		List<Questionario> questionario = recuperarQuestionario(user);
-		//Pessoa pessoaSalva = pessoaService.save(usuario.getPessoa());
-		Usuario userSalvo = usuarioRepository.save(usuario);
-		questionario.forEach(q-> {
-			 q.setPessoa(userSalvo.getPessoa());
-			 questionarioRepository.save(q);
-		});
+		Usuario usuario = convertUserToEntity(user);
+		List<Questionario> questionario = convertQuestionarioToEntity(user);
+		Usuario userSalvo = salvarUsuario(usuario);
+		salvarQuestionario(questionario, userSalvo);
 		return userSalvo;
 	}
 
-	private Pessoa recuperarPessoa(UsuarioRequestDTO user) {
-		Pessoa pessoa = new Pessoa();
-		if (Objects.nonNull(user.getPessoaRequest())) {
-			pessoa = user.getPessoaRequest().toEntity();
-		}
-		return pessoa;
+	private Usuario salvarUsuario(Usuario usuario) {
+		validaUsuarioExistente(usuario);
+		Usuario userSalvo = usuarioRepository.save(usuario);
+		return userSalvo;
 	}
 
-	private Usuario recuperarUsuario(UsuarioRequestDTO user) {
+	private void salvarQuestionario(List<Questionario> questionario, Usuario userSalvo) {
+		List<Questionario> listQuestionario = Lists.newArrayList();
+		questionario.forEach(q-> {
+			 q.setPessoa(userSalvo.getPessoa());
+			 Questionario salvo = questionarioRepository.save(q);
+			 listQuestionario.add(salvo);
+		});
+		userSalvo.getPessoa().setQuestionario(listQuestionario);
+	}
+	
+	private void validaUsuarioExistente(Usuario usuario) {
+		Usuario usuarioBuscado = usuarioRepository.findByEmail(usuario.getEmail());
+		Usuario usuarioUserName = usuarioRepository.findByUserName(usuario.getUserName());
+		if(Objects.nonNull(usuarioBuscado) || Objects.nonNull(usuarioUserName)) {
+			throw new UsuarioExistenteException();
+		}
+		
+	}
+
+	private Usuario convertUserToEntity(UsuarioRequestDTO user) {
 		if (Objects.nonNull(user)) {
 			return user.toEntity();
 		} else {
@@ -62,7 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 	}
 
-	private List<Questionario> recuperarQuestionario(UsuarioRequestDTO user) {
+	private List<Questionario> convertQuestionarioToEntity(UsuarioRequestDTO user) {
 
 		List<Questionario> lista = new ArrayList<Questionario>();
 		if (user.getQuestionarioRequest() != null && user.getQuestionarioRequest().size() > 0) {

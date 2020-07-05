@@ -49,7 +49,11 @@ public class Pessoa implements Serializable {
 	
 	@Column
 	private LocalDate dataNascimento;
-		
+	
+//	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+//	@JoinColumn(name = "id_usuario")
+//	private Usuario usuario;
+	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Questionario> questionario;
 	
