@@ -1,4 +1,4 @@
-package br.com.rede_social.domain.service;
+package br.com.rede_social.domain.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rede_social.domain.model.Pessoa;
+import br.com.rede_social.domain.service.PessoaService;
 import br.com.rede_social.infrastructure.repository.PessoaRepository;
 
 @Service
