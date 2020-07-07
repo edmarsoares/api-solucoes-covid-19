@@ -19,8 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "api/questionario", consumes = MediaType.APPLICATION_JSON_VALUE
-		+ ";charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
+@RequestMapping(value = "api/questionario")
 @Api(value = "api/questionario", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class QuestionarioController {
 	
@@ -28,16 +27,15 @@ public class QuestionarioController {
 	private QuestionarioService questionarioService;
 	
 	@ApiOperation(httpMethod = "GET", value = "Listar todos os questionários", notes = "Endpoint para listagem de questionário")
-	@GetMapping("{id}")
-	public ResponseEntity<?> listAllByIdPessoa(@PathVariable Integer id){
-		
+	@GetMapping("/{id}")
+	public ResponseEntity<?> listAllByIdPessoa(@PathVariable("id") Integer id){
 		List<Questionario> questionarios = questionarioService.listAllByIdPessoa(id);
 		return questionarios != null ? ResponseEntity.ok(questionarios) : ResponseEntity.noContent().build();
 	}
 	
 	@ApiOperation(httpMethod = "POST", value = "Cadastrar um questionario", notes = "Endpoint para cadastro de questionário")
 	@PostMapping
-	public ResponseEntity<?> cadastrarUsuario(@RequestBody QuestionarioRequestDTO questionarioDto){
+	public ResponseEntity<?> cadastrarUsuario(@RequestBody QuestionarioRequestDTO questionarioDto) throws Exception{
 		questionarioService.cadastrarQuestionario(questionarioDto);
 		return ResponseEntity.ok().build();
 	}

@@ -25,18 +25,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/api/usuarios")
+@RequestMapping(value = "/api/usuario")
 @Api(value = "/api/usuario", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = "Usuario", description = "Endpoint para cadastro de usuario")
 public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-
-//	@ApiOperation(httpMethod = "GET", value = "So testando", response = Usuario.class)
-//	@GetMapping("test")
-//	public String test() {
-//		return "Iniciando ...";
-//	}
 
 	@ApiOperation(httpMethod = "POST", value = "Cadastro de usuario", notes = "Endpoint para cadastro de usuarios", response = UsuarioResponseDTO.class)
 	@PostMapping

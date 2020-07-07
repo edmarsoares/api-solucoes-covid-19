@@ -25,7 +25,7 @@ public class QuestionarioRequestDTO {
 			questionario = mapper.map(this, Questionario.class);
 		} catch (Exception e) {
 			log.error("Erro ao mapear: {} para entidade: {}", this.getClass().getSimpleName(), Questionario.class.getSimpleName());
-		}
+		} 
 		return questionario;
 	} 
 

@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class Questionario implements Serializable {
 	@SequenceGenerator(name = "tb_questionario_seq", sequenceName = "tb_questionario_seq", allocationSize = 1)
 	private Integer id;
 	
-	@ElementCollection(targetClass = Sintoma.class)
+	@ElementCollection(targetClass = Sintoma.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "t_sintoma", joinColumns = @JoinColumn(name = "id_questionario"))
 	@Column(name = "sintoma", nullable = false)
 	@Enumerated(EnumType.STRING)
