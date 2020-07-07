@@ -30,7 +30,7 @@ public class QuestionarioController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listAllByIdPessoa(@PathVariable("id") Integer id){
 		List<Questionario> questionarios = questionarioService.listAllByIdPessoa(id);
-		return questionarios != null ? ResponseEntity.ok(questionarios) : ResponseEntity.noContent().build();
+		return ResponseEntity.ok(questionarios);
 	}
 	
 	@ApiOperation(httpMethod = "POST", value = "Cadastrar um questionario", notes = "Endpoint para cadastro de questionário")
