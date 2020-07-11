@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.google.common.base.Objects;
 
 import br.com.rede_social.domain.model.Pessoa;
 import br.com.rede_social.domain.model.Questionario;
@@ -28,8 +29,7 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 	}
 
 	@Override
-	public void cadastrarQuestionario(QuestionarioRequestDTO questionarioDTO) throws Exception {
-		
+	public void cadastrarQuestionario(QuestionarioRequestDTO questionarioDTO) {
 		if (questionarioDTO != null) {
 			Questionario questionario = questionarioDTO.toEntity();
 			
@@ -40,6 +40,7 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 				questionario.setPessoa(pessoaEncontrada);
 								
 			}
+
 			this.questionarioRepository.save(questionario);
 		}
 	}

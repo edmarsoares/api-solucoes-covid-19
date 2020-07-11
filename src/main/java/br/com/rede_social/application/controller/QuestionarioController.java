@@ -35,7 +35,7 @@ public class QuestionarioController {
 	
 	@ApiOperation(httpMethod = "POST", value = "Cadastrar um questionario", notes = "Endpoint para cadastro de questionário")
 	@PostMapping
-	public ResponseEntity<?> cadastrarUsuario(@RequestBody QuestionarioRequestDTO questionarioDto) throws Exception{
+	public ResponseEntity<?> cadastrarQuestionario(@RequestBody QuestionarioRequestDTO questionarioDto){
 		questionarioService.cadastrarQuestionario(questionarioDto);
 		return ResponseEntity.ok().build();
 	}
